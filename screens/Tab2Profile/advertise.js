@@ -1,0 +1,501 @@
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Image, Switch, TouchableOpacity, StyleSheet, FlatList, Linking, ScrollView } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { FontAwesome } from '@expo/vector-icons';
+
+const LoginScreen = ({ navigation, route }) => {
+
+
+
+    const handleSkip = () => {
+        navigation.navigate('Main');
+    };
+    const handlePromotionresultse = () => {
+        navigation.navigate('Promotionresults');
+    };
+    const handleSignUp1 = () => {
+        navigation.navigate('Promotiondetails');
+    };
+    const handleTemplate = () => {
+        navigation.navigate('Template')
+    };
+
+    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => {
+       
+        if (route.params?.initialPage) {
+          setCurrentPage(route.params.initialPage);
+        }
+      }, [route.params]);
+
+    const getButtonStyle = (page) => {
+        return currentPage === page
+            ? styles.activeButton
+            : styles.inactiveButton;
+    };
+    const getButtonStyle1 = (selectedButtons, buttonId) => {
+        return selectedButtons.includes(buttonId)
+            ? styles.selectedButton
+            : styles.deselectedButton;
+    };
+    const [selectedButtons, setSelectedButtons] = useState([]);
+
+
+    const toggleButtonSelection = (buttonId) => {
+        if (selectedButtons.includes(buttonId)) {
+            setSelectedButtons(selectedButtons.filter((id) => id !== buttonId)); 
+        } else {
+            setSelectedButtons([...selectedButtons, buttonId]);
+        }
+    };
+
+    const getTextStyle = (selectedButtons, buttonId) => {
+        return selectedButtons.includes(buttonId)
+            ? styles.selectedText
+            : styles.deselectedText;
+    };
+
+
+    const buttonsData = [
+        { id: 1, label: 'โปรโมทงาน' },
+        { id: 2, label: 'โปรโมทโปรไฟล์ของคุณ' },
+        { id: 3, label: 'โปรโมทร้านอาหาร' },
+        { id: 4, label: 'โปรโมทที่พักของคุณ' },
+        { id: 5, label: 'โปรโมทสินค้าของคุณ' },
+        { id: 6, label: 'โปรโมทบริการของคุณ' },
+        { id: 7, label: 'โปรโมทอีเว้นท์ของคุณ' },
+    ];
+
+    const data = [
+        {
+            id: '1',
+            image: require('../../images/advertise/1 801.png'),
+            name1: '🚀  ด่วน!ตามหา UX/UI....',
+            name2: 'ประเภท : โปรโมทงาน',
+            name3: 'คนดู : 220',
+            name4: 'เหลือเวลา : 5 วัน',
+        },
+        {
+            id: '2',
+            image: require('../../images/advertise/6 (1).png'),
+            name1: 'หางานด่วน!!',
+            name2: 'ประเภท : โปรโมทงาน',
+            name3: 'คนดู : 220',
+            name4: 'เหลือเวลา : 5 วัน',
+        },
+        {
+            id: '3',
+            image: require('../../images/advertise/10 (1).png'),
+            name1: 'รับสมัครด่วน',
+            name2: 'ประเภท : โปรโมทงาน',
+            name3: 'คนดู : 220',
+            name4: 'เหลือเวลา : 5 วัน',
+        },
+    ];
+
+    const [text, setText] = useState('');
+
+    const [switchStates, setSwitchStates] = useState(
+        data.reduce((acc, item) => ({ ...acc, [item.id]: false }), {})
+    );
+
+    const toggleSwitch = (id) => {
+        setSwitchStates((prev) => ({ ...prev, [id]: !prev[id] }));
+    };
+    
+    const renderItem = ({ item }) => (
+        <View>
+            <View style={styles.item}>
+                <TouchableOpacity style={styles.item1}>
+                    <Image source={item.image} style={styles.image} />
+                    <View style={styles.details}>
+                        <Text style={styles.name}>{item.name1}</Text>
+                        <Text style={styles.info}>{item.name2}</Text>
+                        <Text style={styles.info}>{item.name3}</Text>
+                        <Text style={styles.info}>{item.name4}</Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={styles.container8}>
+                    <TouchableOpacity style={styles.iconButton}>
+                        <FontAwesome
+                            name={switchStates[item.id] ? 'eye' : 'eye-slash'}
+                            size={15}
+                            color={switchStates[item.id] ? '#F3A57E' : '#726D6B'}
+                        />
+                    </TouchableOpacity>
+                    <Switch
+                        value={switchStates[item.id]}
+                        onValueChange={() => toggleSwitch(item.id)}
+                        thumbColor={switchStates[item.id] ? '#FFFFFF' : '#FFFFFF'} 
+                        trackColor={{ false: '#767577', true: '#4CD964' }} 
+                        style={styles.switch}
+                    />
+                </View>
+            </View>
+            <View style={styles.container9}>
+                <TouchableOpacity style={styles.button5} onPress={handleSignUp1}>
+                    <Text style={styles.Textframe7}>แก้ไข</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button6}>
+                    <Text style={styles.Textframe8}>ลบ</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.underline} />
+            <View style={styles.buttons}>
+                <TouchableOpacity
+                    style={[styles.button, getButtonStyle(1)]}
+                    onPress={() => setCurrentPage(1)}
+                >
+                    <Text style={styles.buttonText}>กรอกข้อมูล</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={[styles.button, getButtonStyle(2)]}
+                    onPress={() => setCurrentPage(2)}
+                >
+                    <Text style={styles.buttonText}>โฆษณาทั้งหมด</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.underline} />
+            <View style={styles.page}>
+                {currentPage === 1 ? (
+                    <View style={styles.container1}>
+                        <View style={styles.container2}>
+                            <Text style={styles.Textframe1}>ประเภทโฆษณา</Text>
+                            <Text style={styles.Textframe2}>( เลือกประเภทโฆษณา)</Text>
+                        </View>
+                        <View style={styles.container3}>
+                            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                                {buttonsData.map((button) => (
+                                    <TouchableOpacity
+                                        key={button.id}
+                                        style={[styles.button1, getButtonStyle1(selectedButtons, button.id)]}
+                                        onPress={() => toggleButtonSelection(button.id)}
+                                    >
+                                        <Text style={[styles.buttonText, getTextStyle(selectedButtons, button.id)]}>
+                                            {button.label}</Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </ScrollView>
+                        </View>
+                        <View style={styles.container2}>
+                            <View>
+                                <Text style={styles.Textframe2}>หัวข้อคุณ *</Text>
+                            </View>
+                            <View>
+                                <TextInput
+                                    style={styles.input}
+                                    value={text}
+                                    onChangeText={setText} 
+                                />
+                            </View>
+                        </View>
+                        <View style={styles.container4}>
+                            <View>
+                                <Text style={styles.Textframe2}>อัพโหลดรูปภาพโฆษณาของคุณ</Text>
+                                <Text style={styles.Textframe2}>(หากไม่มีคุณสามารถใช้เทมเพลตเราได้)</Text>
+                            </View>
+                            <TouchableOpacity style={styles.button2} onPress={handleTemplate}>
+                                <Text style={styles.Textframe3}>ใช้เทมเพลต</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.container5}>
+                            <View style={styles.sectionmore}>
+                                <View>
+                                    <Ionicons name="cloud-upload-outline" size={50} color="#F6DED1" />
+                                </View>
+                                <Text style={styles.screenText1}>อัปโหลดไฟล์ของคุณที่นี่</Text>
+                                <Text style={styles.Textframe2}>เลือกไฟล์</Text>
+                            </View>
+                        </View>
+                        <View style={styles.container6}>
+                            <View>
+                                <Text style={styles.Textframe2}>คำอธิบายเพิ่มเติม (ตัวอย่างการกรอก) *</Text>
+                            </View>
+                            <View>
+                                <TextInput
+                                    style={styles.input1}
+                                    value={text}
+                                    onChangeText={setText} 
+                                />
+                            </View>
+                        </View>
+                        <View style={styles.screen}>
+                            <TouchableOpacity style={styles.button3} onPress={handlePromotionresultse}>
+                                <Text style={styles.Textframe4}>บันทึกและลงโฆษณา</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                ) : (
+                    <View>
+                        <View style={styles.container7}>
+                            <Text style={styles.Textframe5}>เลือกประเภทเทล</Text>
+                            <View>
+                                <TouchableOpacity style={styles.button4}>
+                                    <Text style={styles.Textframe7}>ประเภท</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <FlatList
+                            data={data}
+                            keyExtractor={(item) => item.id}
+                            renderItem={renderItem}
+                        />
+                    </View>
+                )}
+            </View>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+    },
+    container1: {
+        height: '96%'
+    },
+    container2: {
+        padding: 20,
+    },
+    container3: {
+        left: 10
+    },
+    container4: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 15
+    },
+    container5: {
+        padding: 20,
+    },
+    container6: {
+        padding: 20,
+        marginTop: -30
+    },
+    buttons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+        marginTop: 5,
+        marginBottom: 5
+    },
+    button: {
+        paddingVertical: 5,
+        paddingHorizontal: 50,
+        borderRadius: 50,
+        marginHorizontal: 10,
+    },
+    button1: {
+        paddingVertical: 5,
+        paddingHorizontal: 20,
+        borderRadius: 50,
+        marginHorizontal: 5,
+    },
+    button2: {
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        borderRadius: 10,
+        backgroundColor: '#FFB472'
+    },
+    button3: {
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        borderRadius: 50,
+        backgroundColor: '#FFB472',
+        alignItems: 'center'
+    },
+    activeButton: {
+        backgroundColor: '#F1F1F1', 
+    },
+    inactiveButton: {
+        backgroundColor: '#FFFFFF', 
+    },
+    buttonText: {
+        color: '#626262',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 13,
+    },
+    page: {
+        width: '100%',
+
+    },
+    underline: {
+        height: 1, 
+        width: '100%',
+        backgroundColor: '#F1F1F1', 
+    },
+    Textframe1: {
+        color: '#DF8C62',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 13,
+    },
+    Textframe2: {
+        color: '#6D6D6D',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 13,
+    },
+    Textframe3: {
+        color: '#fff',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 12,
+    },
+    Textframe4: {
+        color: '#fff',
+        fontFamily: 'Sarabun-SemiBold',
+        fontSize: 15,
+    },
+    selectedButton: {
+        backgroundColor: '#FFB472',
+    },
+    deselectedButton: {
+        backgroundColor: '#FFF4EB',
+    },
+    selectedText: {
+        color: '#fff',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 13,
+    },
+    deselectedText: {
+        color: '#726D6B', 
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 12
+    },
+    input: {
+        width: '100%',
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#F6DED1',
+        marginBottom: -20,
+        marginTop: 5
+    },
+    input1: {
+        width: '100%',
+        padding: 30,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#F6DED1',
+        marginBottom: -20,
+        marginTop: 5
+    },
+    sectionmore: {
+        borderWidth: 1,
+        borderColor: '#F6DED1',
+        borderRadius: 20,
+        alignItems: 'center',
+        padding: 40,
+        marginBottom: 10
+    },
+    screen: {
+        position: 'absolute',
+        bottom: -5,
+        left: 0,
+        right: 0,
+        padding: 20,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+    },
+    /////////////////2/////////////////////////
+    container7: {
+        padding: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    container8: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: -70
+    },
+    container9: {
+        padding: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: -10
+    },
+    Textframe5: {
+        color: '#626262',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 14,
+    },
+    Textframe6: {
+        color: '#626262',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 14,
+    },
+    Textframe7: {
+        color: '#E98B5C',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 14,
+    },
+    Textframe8: {
+        color: '#565656',
+        fontFamily: 'Sarabun-Medium',
+        fontSize: 12,
+    },
+    button4: {
+        borderWidth: 1,
+        borderColor: '#F1996C',
+        paddingVertical: 2,
+        paddingHorizontal: 20,
+        borderRadius: 50,
+        marginLeft: 10
+    },
+    button5: {
+        borderWidth: 1,
+        borderColor: '#F1996C',
+        paddingVertical: 3,
+        paddingHorizontal: 120,
+        borderRadius: 50,
+    },
+    button6: {
+        borderWidth: 1,
+        borderColor: '#EAEAEA',
+        backgroundColor: '#EAEAEA',
+        paddingVertical: 3,
+        paddingHorizontal: 35,
+        borderRadius: 50,
+    },
+    item: {
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        padding: 20,
+        borderRadius: 5,
+    },
+    item1: {
+        flexDirection: 'row',
+        width: '85%'
+    },
+    image: {
+        marginRight: 10,
+    },
+    details: {
+        flex: 1,
+    },
+    name: {
+        fontSize: 12,
+        fontFamily: 'Sarabun-SemiBold',
+        marginBottom: 5,
+    },
+    info: {
+        fontSize: 14,
+        color: '#555',
+    },
+    iconButton: {
+        marginHorizontal: 1,
+    },
+    switch: {
+        marginLeft: 2,
+    },
+});
+
+export default LoginScreen;
