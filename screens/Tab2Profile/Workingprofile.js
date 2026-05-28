@@ -6,8 +6,10 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Entypo from '@expo/vector-icons/Entypo';
 
+import { useTab } from '../../components/TabContext';
+
 const StepForm = ({ navigation, route }) => {
-    const { setCurrentTab } = route.params;
+    const { setCurrentTab } = useTab();
 
     const handlePress = () => {
         setCurrentTab(2);

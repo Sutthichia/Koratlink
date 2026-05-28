@@ -4,8 +4,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
-const Alternate = ({ navigation, route }) => {
-  const { setCurrentTab } = route.params;
+import { useTab } from '../../components/TabContext';
+
+const Alternate = ({ navigation }) => {
+  const { setCurrentTab } = useTab();
   const handleLogin = () => {
     navigation.navigate('Login');
   };
@@ -41,7 +43,7 @@ const Alternate = ({ navigation, route }) => {
         <View style={styles.top9}>
           <TouchableOpacity style={styles.top10} onPress={handleLogin} >
             <Image
-              source={require('../images/icon/1.png')}
+              source={require('../../images/icon/1.png')}
               style={styles.logo4}
               resizeMode="contain"
             />
@@ -49,7 +51,7 @@ const Alternate = ({ navigation, route }) => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.top10} onPress={handleLogin3}>
             <Image
-              source={require('../images/icon/2.png')}
+              source={require('../../images/icon/2.png')}
               style={styles.logo4}
               resizeMode="contain"
             />

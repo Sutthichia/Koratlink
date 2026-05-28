@@ -4,7 +4,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native'; 
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const SignupScreen1 = () => {
+const RegistrationScreen = () => {
   const [name, setName] = useState('');
   const [contact, setContact] = useState(''); 
   const [fullName, setFullName] = useState('');
@@ -24,10 +24,6 @@ const SignupScreen1 = () => {
   const handleLogin = () => {
     navigation.navigate('LoginScreen'); 
   };
-  
-  const handleRegisterProfile = () => {
-    navigation.navigate('RegisterProfile'); 
-  };
 
   const openFacebookForm = () => {
     Linking.openURL('https://www.facebook.com/form-url'); 
@@ -44,7 +40,7 @@ const SignupScreen1 = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../images/Union.png')}
+        source={require('../../images/Union.png')}
         style={styles.logo}
       />
       <View style={styles.Up}>
@@ -103,21 +99,21 @@ const SignupScreen1 = () => {
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialButton} onPress={openFacebookForm}>
           <Image
-            source={require('../images/icon/Logo Google.png')}
+            source={require('../../images/icon/Logo Google.png')}
             style={styles.logo1}
             resizeMode="contain"
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.socialButton} onPress={openGoogleForm}>
           <Image
-            source={require('../images/icon/Logo.png')}
+            source={require('../../images/icon/Logo.png')}
             style={styles.logo1}
             resizeMode="contain"
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.socialButton} onPress={openAppleForm}>
           <Image
-            source={require('../images/icon/Logo (1).png')}
+            source={require('../../images/icon/Logo (1).png')}
             style={styles.logo1}
             resizeMode="contain"
           />
@@ -292,4 +288,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupScreen1;
+export default RegistrationScreen;

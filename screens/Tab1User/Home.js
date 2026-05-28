@@ -284,7 +284,7 @@ const ScreenA = ({ navigation }) => {
           contentContainerStyle={styles.menuContentContainer}
           style={styles.newContent1}>
         {options1.map((options1, index) => (
-          <View style={styles.container44}>
+          <View key={index} style={styles.container44}>
             <TouchableOpacity  style={styles.container5} >
               <Image source={options1.logo} style={styles.logo1} resizeMode="contain" />
               <View style={styles.container6}>
@@ -372,7 +372,7 @@ const ScreenA = ({ navigation }) => {
           contentContainerStyle={styles.menuContentContainer}
           style={styles.newContent1}>
         {options1.map((options1, index) => (
-          <View style={styles.container44}>
+          <View key={index} style={styles.container44}>
             <TouchableOpacity  style={styles.container5} >
               <Image source={options1.logo} style={styles.logo1} resizeMode="contain" />
               <View style={styles.container6}>

@@ -32,7 +32,7 @@ const Login = ({ navigation }) => {
     <View style={styles.container}>
       <View style ={styles.top}>
         <Image
-          source={require('../images/Union.png')}
+          source={require('../../images/Union.png')}
           style={styles.logo}
           resizeMode="contain"
         />

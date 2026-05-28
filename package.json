@@ -34,7 +34,7 @@
     "react-native-gesture-handler": "~2.16.1",
     "react-native-gradient-texts": "*",
     "react-native-linear-gradient": "*",
-    "react-native-maps": "1.14.0",
+    "react-native-maps": "^1.14.0",
     "react-native-maps-directions": "^1.9.0",
     "react-native-modal": "^13.0.1",
     "react-native-paper": "4.9.2",

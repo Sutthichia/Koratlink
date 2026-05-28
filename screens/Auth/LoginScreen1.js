@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
-import { useAuth } from '../components/AuthContext';
+import { useAuth } from '../../components/AuthContext';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const LoginScreen = ({ navigation, route }) => {
-  const { setCurrentTab } = route.params;
+import { useTab } from '../../components/TabContext';
+
+const LoginScreen = ({ navigation }) => {
+  const { setCurrentTab } = useTab();
   const { login, resetPassword, isUserLoggedIn } = useAuth();
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -83,7 +85,7 @@ const LoginScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../images/Union.png')}
+        source={require('../../images/Union.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -134,21 +136,21 @@ const LoginScreen = ({ navigation, route }) => {
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialButton} onPress={openFacebookForm}>
           <Image
-            source={require('../images/icon/Logo Google.png')}
+            source={require('../../images/icon/Logo Google.png')}
             style={styles.logo1}
             resizeMode="contain"
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.socialButton} onPress={openGoogleForm}>
           <Image
-            source={require('../images/icon/Logo.png')}
+            source={require('../../images/icon/Logo.png')}
             style={styles.logo1}
             resizeMode="contain"
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.socialButton} onPress={openAppleForm}>
           <Image
-            source={require('../images/icon/Logo (1).png')}
+            source={require('../../images/icon/Logo (1).png')}
             style={styles.logo1}
             resizeMode="contain"
           />

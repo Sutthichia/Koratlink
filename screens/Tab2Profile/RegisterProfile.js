@@ -3,8 +3,10 @@ import { Animated, View, StyleSheet, Text, Image, TouchableOpacity, Button, Swit
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useTab } from '../../components/TabContext';
 
 const StepForm = ({ navigation, route }) => {
+    const { setCurrentTab } = useTab();
     const [isEnabled, setIsEnabled] = useState(false);
     const [isEnabled2, setIsEnabled2] = useState(false);
     const [step, setStep] = useState(1);
@@ -60,7 +62,7 @@ const StepForm = ({ navigation, route }) => {
         }
     };
 
-    const { setCurrentTab } = route.params;
+
     const [useRegisteredInfo, setUseRegisteredInfo] = useState(false);
     const [isDocumentEnabled, setIsDocumentEnabled] = useState(true);
     const [jobTitle, setJobTitle] = useState('');

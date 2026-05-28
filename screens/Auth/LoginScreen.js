@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
-import { useAuth } from '../components/AuthContext';
+import { useAuth } from '../../components/AuthContext';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const LoginScreen = ({ navigation }) => {
@@ -79,7 +79,7 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.customButtonText4}>ข้าม</Text>
       </TouchableOpacity>
       <Image
-        source={require('../images/Union.png')}
+        source={require('../../images/Union.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -129,21 +129,21 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialButton} onPress={openFacebookForm}>
           <Image
-            source={require('../images/icon/Logo Google.png')}
+            source={require('../../images/icon/Logo Google.png')}
             style={styles.logo1}
             resizeMode="contain"
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.socialButton} onPress={openGoogleForm}>
           <Image
-            source={require('../images/icon/Logo.png')}
+            source={require('../../images/icon/Logo.png')}
             style={styles.logo1}
             resizeMode="contain"
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.socialButton} onPress={openAppleForm}>
           <Image
-            source={require('../images/icon/Logo (1).png')}
+            source={require('../../images/icon/Logo (1).png')}
             style={styles.logo1}
             resizeMode="contain"
           />
